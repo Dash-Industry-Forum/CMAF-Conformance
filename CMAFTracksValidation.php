@@ -45,6 +45,10 @@ function checkCMAFTracks(){
             $adaptation_set_template, $reprsentation_template, $reprsentation_error_log_template, $reprsentation_mdat_template, $profiles, $cmaf_mediaTypes,
             $progress_report, $progress_xml, $cmaf_mediaProfiles;
     
+    $adaptation_set = $mpd_features['Period'][$current_period]['AdaptationSet'][$current_adaptation_set];
+    $representation  = $adaptation_set['Representation'][$current_representation];
+    ValidateDolby($adaptation_set, $representation);
+    
     $adapt_dir = str_replace('$AS$', $current_adaptation_set, $adaptation_set_template);
     $rep_xml_dir = str_replace(array('$AS$', '$R$'), array($current_adaptation_set, $current_representation), $reprsentation_template);
     $rep_xml = $session_dir . '/Period' . $current_period . '/' . $adapt_dir . '/' . $rep_xml_dir . '.xml';
